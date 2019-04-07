@@ -9,10 +9,8 @@
     using System.Reflection;
 
     using FoxKit.Modules.DataSet.Exporter;
-    using FoxKit.Modules.DataSet.Fox.TppEffect;
     using FoxKit.Modules.DataSet.FoxCore;
     using FoxKit.Modules.DataSet.Importer;
-    using FoxKit.Modules.Lua;
     using FoxKit.Utils;
     using FoxKit.Utils.Structs;
 
@@ -114,6 +112,7 @@
         /// </param>
         public void Initialize(Core.Entity entityData, EntityFactory.EntityInitializeFunctions initFunctions)
         {
+            this.Address = entityData.Address;
             this.ReadStaticProperties(entityData.StaticProperties, initFunctions);
 
             foreach (var unused in entityData.DynamicProperties)
@@ -732,7 +731,7 @@
         public virtual void OnUnloaded(DestroySceneProxyDelegate destroySceneProxy)
         {
         }
-
+        
         /// <summary>
         /// Creates writable list of Entity static properties.
         /// </summary>

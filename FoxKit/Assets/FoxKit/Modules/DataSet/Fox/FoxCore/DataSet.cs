@@ -1,6 +1,7 @@
 ﻿namespace FoxKit.Modules.DataSet.Fox.FoxCore
 {
     using OdinSerializer;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEditor;
@@ -59,9 +60,6 @@
         /// <param name="key">
         /// The string key (name) of the Entity.
         /// </param>
-        /// <param name="address">
-        /// The memory address of the Entity. Only needed when loading from a DataSet file.
-        /// </param>
         /// <param name="entity">
         /// The entity to add.
         /// </param>
@@ -74,6 +72,15 @@
                 entity.DataSetGuid = this.DataSetGuid;
                 entity.Address = this.addressGenerator.Next();
             }
+        }
+
+        /// <summary>
+        /// Generates a new Entity address.
+        /// </summary>
+        /// <returns>The new Entity address.</returns>
+        public ulong RequestNewAddress()
+        {
+            return this.addressGenerator.Next();
         }
         
         /// <summary>
@@ -138,8 +145,10 @@
         /// <summary>
         /// Generates addresses for Entities.
         /// </summary>
+        [Serializable]
         private class AddressGenerator
         {
+            [SerializeField]
             private uint previousAddress = 0x10000000u;
 
             /// <summary>
